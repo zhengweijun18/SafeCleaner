@@ -1,0 +1,62 @@
+{
+  "version": "4.14",
+  "locked": true,
+  "productName": "SafeMac Cleaner Lite",
+  "visual": {
+    "backgroundTop": "#070A0F",
+    "backgroundBottom": "#030407",
+    "sidebarTop": "#0B0E16",
+    "sidebarBottom": "#05070B",
+    "surfaceTop": "#131620",
+    "surfaceBottom": "#090B12",
+    "border": "rgba(255,255,255,0.085)",
+    "borderStrong": "rgba(159,92,255,0.28)",
+    "text": "#FAFAFA",
+    "textSecondary": "#BABABA",
+    "textMuted": "#7A7A7A",
+    "accentBlue": "#318CFF",
+    "accentPurple": "#9E40FF",
+    "green": "#45D17F",
+    "orange": "#FFA833",
+    "cornerRadius": {
+      "sidebarCard": 14,
+      "metricCard": 15,
+      "mainButton": 17,
+      "secondaryButton": 13,
+      "badge": 11
+    },
+    "sidebarWidth": 236,
+    "minWindow": [
+      880,
+      600
+    ],
+    "primaryButtonHeight": 54,
+    "progressHeight": 8
+  },
+  "interaction": {
+    "navigationStartsScan": false,
+    "navigationAllowedDuringScan": true,
+    "scanSurvivesNavigation": true,
+    "singleScanAtATime": true,
+    "pauseResume": true,
+    "cancelScan": true,
+    "hoverState": true,
+    "pressedState": true,
+    "selectedState": true,
+    "disabledState": true,
+    "destructiveDefault": "recycle_bin_or_trash",
+    "permanentDelete": false
+  },
+  "features": [
+    "智能扫描",
+    "大文件",
+    "应用卸载",
+    "应用残留",
+    "后台扫描跨页面保持",
+    "暂停/继续",
+    "取消扫描",
+    "扫描结果按页面缓存",
+    "手动勾选",
+    "默认移动到废纸篓/回收站"
+  ]
+}

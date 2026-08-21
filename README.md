@@ -1,18 +1,18 @@
 # SafeMac Cleaner Lite
 
-本仓库仅维护和分发当前最新的 **v4.14 跨平台同步基线版**。
+本仓库仅维护当前最新的 **v4.14 跨平台同步基线版**。
 
-SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的磁盘清理与应用卸载工具。当前版本统一支持 macOS Intel、macOS Apple Silicon / Universal2 与 Windows，并锁定同一套功能、交互和视觉基线。
+SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的磁盘清理与应用卸载工具。macOS Intel、macOS Apple Silicon / Universal2 与 Windows 共享同一套功能、交互和视觉基线；平台差异仅存在于系统路径、权限模型与底层 API。
 
 ## 按需下载
 
 | 使用场景 | 下载入口 | 使用方式 |
 | --- | --- | --- |
-| v4.14 跨平台完整版 | [下载 v4.14 ZIP 包](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_CrossPlatform.zip) | 推荐下载。一个压缩包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
-| macOS Intel / M 芯片 | 使用上面的 v4.14 ZIP 包 | 解压后进入 `macOS`，双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
-| Windows x64 / ARM64 | 使用上面的 v4.14 ZIP 包 | 解压后进入 `Windows`，双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
+| v4.14 跨平台完整源码 | [下载仓库 ZIP](https://github.com/zhengweijun18/SafeCleaner/archive/refs/heads/main.zip) | 推荐。一个包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
+| macOS Intel / M 芯片 | [进入 macOS 目录](https://github.com/zhengweijun18/SafeCleaner/tree/main/macOS) | 下载仓库后进入 `macOS`，双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
+| Windows x64 / ARM64 | [进入 Windows 目录](https://github.com/zhengweijun18/SafeCleaner/tree/main/Windows) | 下载仓库后进入 `Windows`，双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
 
-当前只保留 **v4.14**，不再向仓库推送 v4.13.1 及更早历史包。
+> 仓库只保留 v4.14 当前版本，不再保存 v4.13.1 及更早历史安装包。
 
 ## 当前功能
 
@@ -36,15 +36,17 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 | Windows | x64 | Windows 10 1809+ | WPF / .NET 8 |
 | Windows | ARM64 | Windows 10/11 ARM64 | WPF / .NET 8 |
 
+## 文件说明
+
+- `macOS/`：macOS AppKit / Swift 源码、图标源文件、构建和安装脚本。
+- `Windows/`：Windows WPF / .NET 8 源码、发布和安装脚本。
+- `Shared/FEATURE_LOCK.md`：跨平台功能与交互锁。
+- `Shared/design-lock.json`：视觉设计 Token 与行为基线。
+- `Shared/PLATFORM_MATRIX.md`：平台、架构和最低系统版本矩阵。
+
 ## macOS 使用方式
 
-下载并解压 v4.14 ZIP 后，进入：
-
-```text
-SafeCleaner_v414_GitHub/macOS
-```
-
-双击：
+下载仓库 ZIP 并解压，进入 `macOS/`，双击：
 
 ```text
 双击安装-macOS.command
@@ -60,13 +62,7 @@ SafeCleaner_v414_GitHub/macOS
 
 ## Windows 使用方式
 
-下载并解压 v4.14 ZIP 后，进入：
-
-```text
-SafeCleaner_v414_GitHub\Windows
-```
-
-双击：
+下载仓库 ZIP 并解压，进入 `Windows/`，双击：
 
 ```text
 双击安装-Windows.cmd
@@ -82,7 +78,7 @@ SafeCleaner_v414_GitHub\Windows
 
 ## 设计与功能锁
 
-v4.14 已将以下内容作为跨平台锁定基线：
+v4.14 将以下内容作为跨平台锁定基线：
 
 1. 左侧四个一级入口与信息层级一致。
 2. 深黑蓝背景、玻璃卡片、蓝紫渐变、圆角和间距原则一致。
@@ -94,14 +90,6 @@ v4.14 已将以下内容作为跨平台锁定基线：
 8. 删除默认进入废纸篓 / 回收站，可恢复。
 9. 平台差异仅用于系统路径和底层 API，不允许自行改变产品交互。
 
-完整包内包含：
-
-```text
-Shared/FEATURE_LOCK.md
-Shared/design-lock.json
-Shared/PLATFORM_MATRIX.md
-```
-
 ## 安全说明
 
 - 不自动执行破坏性清理。
@@ -110,23 +98,3 @@ Shared/PLATFORM_MATRIX.md
 - 模糊匹配项默认不勾选。
 - macOS 完全磁盘访问权限必须由用户在系统设置中手动授权。
 - 默认删除方式始终为废纸篓 / 回收站，可恢复。
-
-## 文件校验
-
-当前 v4.14 ZIP：
-
-```text
-SHA-256: 29e0f237bca4a9b1ecd2d829dcc645acf745a617a955baf294e89706e6465e8e
-```
-
-macOS：
-
-```bash
-shasum -a 256 SafeCleaner_v414_CrossPlatform.zip
-```
-
-Windows PowerShell：
-
-```powershell
-Get-FileHash .\SafeCleaner_v414_CrossPlatform.zip -Algorithm SHA256
-```

@@ -1,0 +1,9 @@
+.DS_Store
+.build-v414/
+dist/
+*.app
+bin/
+obj/
+.vs/
+*.user
+*.suo
