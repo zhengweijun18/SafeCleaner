@@ -1,0 +1,57 @@
+name: Build v4.14 download package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'macOS/**'
+      - 'Windows/**'
+      - 'Shared/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.github/workflows/package-v414.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build cross-platform ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf downloads /tmp/SafeCleaner_v414_CrossPlatform
+          mkdir -p downloads /tmp/SafeCleaner_v414_CrossPlatform
+
+          cp -R macOS Windows Shared /tmp/SafeCleaner_v414_CrossPlatform/
+          cp README.md CHANGELOG.md /tmp/SafeCleaner_v414_CrossPlatform/
+          if [ -f .gitignore ]; then
+            cp .gitignore /tmp/SafeCleaner_v414_CrossPlatform/
+          fi
+
+          cd /tmp
+          zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_CrossPlatform.zip" SafeCleaner_v414_CrossPlatform
+          cd "$GITHUB_WORKSPACE"
+          sha256sum downloads/SafeCleaner_v414_CrossPlatform.zip > downloads/SHA256SUMS.txt
+
+      - name: Commit download package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add downloads/SafeCleaner_v414_CrossPlatform.zip downloads/SHA256SUMS.txt
+          if git diff --cached --quiet; then
+            echo 'Package is already up to date.'
+            exit 0
+          fi
+          git commit -m 'release: publish v4.14 cross-platform download package'
+          git push
