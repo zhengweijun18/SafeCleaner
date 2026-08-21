@@ -22,7 +22,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          base64 -d .bootstrap/source.tar.xz.b64 > /tmp/source.tar.xz
+          cat .bootstrap/part-* > /tmp/source.tar.xz.b64
+          base64 -d /tmp/source.tar.xz.b64 > /tmp/source.tar.xz
           xz -d -c /tmp/source.tar.xz | tar -xf - -C "$GITHUB_WORKSPACE"
           rm -rf .bootstrap
 
