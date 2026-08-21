@@ -2,15 +2,17 @@
 
 本仓库仅维护和分发当前最新的 **v4.14 跨平台同步基线版**。
 
-SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的磁盘清理与应用卸载工具。当前版本已经统一 macOS Intel、macOS Apple Silicon / Universal2 与 Windows 的功能、交互和视觉基线；平台差异仅存在于系统路径、权限模型和底层 API。
+SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的磁盘清理与应用卸载工具。当前版本统一支持 macOS Intel、macOS Apple Silicon / Universal2 与 Windows，并锁定同一套功能、交互和视觉基线。
 
 ## 按需下载
 
 | 使用场景 | 下载入口 | 使用方式 |
 | --- | --- | --- |
-| v4.14 完整工程 | [下载仓库 ZIP](https://github.com/zhengweijun18/SafeCleaner/archive/refs/heads/main.zip) | 包含 macOS、Windows 与 Shared 跨平台规则。推荐用于保存、继续开发或同步到其它机器。 |
-| macOS | [`macOS/`](macOS/) | Intel Mac 可构建 x86_64；新版 Xcode / SDK 可构建 Universal2。进入目录后双击 `双击安装-macOS.command`。 |
-| Windows | [`Windows/`](Windows/) | 支持 Windows 10/11、x64/ARM64。进入目录后双击 `双击安装-Windows.cmd`，首次构建需要 .NET 8 SDK。 |
+| v4.14 跨平台完整版 | [下载 v4.14 ZIP 包](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_CrossPlatform.zip) | 推荐下载。一个压缩包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
+| macOS Intel / M 芯片 | 使用上面的 v4.14 ZIP 包 | 解压后进入 `macOS`，双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
+| Windows x64 / ARM64 | 使用上面的 v4.14 ZIP 包 | 解压后进入 `Windows`，双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
+
+当前只保留 **v4.14**，不再向仓库推送 v4.13.1 及更早历史包。
 
 ## 当前功能
 
@@ -18,10 +20,10 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 - **大文件**：按体积筛选，仅用于人工判断，不默认勾选。
 - **应用卸载**：应用本体 + 精确关联配置、缓存、容器 / AppData 等。
 - **应用残留**：保守识别疑似孤儿配置和残留目录。
+- **手动触发扫描**：点击左侧菜单只切换页面，不自动开始扫描。
 - **后台扫描**：扫描过程中允许切换左侧页面，原扫描任务继续运行，不重置进度。
-- **手动触发**：点击左侧菜单只切换页面，不自动扫描；必须手动点击主按钮开始。
 - **暂停 / 继续 / 取消**：扫描任务支持协作式暂停与安全取消。
-- **按钮状态**：Default / Hover / Pressed / Selected / Disabled 全局统一。
+- **按钮完整交互状态**：Default / Hover / Pressed / Selected / Disabled。
 - **安全清理**：不自动删除；用户手动勾选；默认移到 macOS 废纸篓 / Windows 回收站；不提供默认永久删除。
 
 ## 平台支持
@@ -36,7 +38,13 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 ## macOS 使用方式
 
-进入 `macOS/`，双击：
+下载并解压 v4.14 ZIP 后，进入：
+
+```text
+SafeCleaner_v414_GitHub/macOS
+```
+
+双击：
 
 ```text
 双击安装-macOS.command
@@ -52,7 +60,13 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 ## Windows 使用方式
 
-进入 `Windows/`，双击：
+下载并解压 v4.14 ZIP 后，进入：
+
+```text
+SafeCleaner_v414_GitHub\Windows
+```
+
+双击：
 
 ```text
 双击安装-Windows.cmd
@@ -68,7 +82,7 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 ## 设计与功能锁
 
-从 v4.14 开始，以下内容作为跨平台锁定基线：
+v4.14 已将以下内容作为跨平台锁定基线：
 
 1. 左侧四个一级入口与信息层级一致。
 2. 深黑蓝背景、玻璃卡片、蓝紫渐变、圆角和间距原则一致。
@@ -80,11 +94,13 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 8. 删除默认进入废纸篓 / 回收站，可恢复。
 9. 平台差异仅用于系统路径和底层 API，不允许自行改变产品交互。
 
-详细规则见：
+完整包内包含：
 
-- [`Shared/FEATURE_LOCK.md`](Shared/FEATURE_LOCK.md)
-- [`Shared/design-lock.json`](Shared/design-lock.json)
-- [`Shared/PLATFORM_MATRIX.md`](Shared/PLATFORM_MATRIX.md)
+```text
+Shared/FEATURE_LOCK.md
+Shared/design-lock.json
+Shared/PLATFORM_MATRIX.md
+```
 
 ## 安全说明
 
@@ -94,3 +110,23 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 - 模糊匹配项默认不勾选。
 - macOS 完全磁盘访问权限必须由用户在系统设置中手动授权。
 - 默认删除方式始终为废纸篓 / 回收站，可恢复。
+
+## 文件校验
+
+当前 v4.14 ZIP：
+
+```text
+SHA-256: 29e0f237bca4a9b1ecd2d829dcc645acf745a617a955baf294e89706e6465e8e
+```
+
+macOS：
+
+```bash
+shasum -a 256 SafeCleaner_v414_CrossPlatform.zip
+```
+
+Windows PowerShell：
+
+```powershell
+Get-FileHash .\SafeCleaner_v414_CrossPlatform.zip -Algorithm SHA256
+```
