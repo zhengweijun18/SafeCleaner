@@ -8,34 +8,47 @@
         MinWidth="980"
         MinHeight="640"
         WindowStartupLocation="CenterScreen"
-        Background="#030407"
-        Foreground="#FAFAFA">
+        Background="#050A12"
+        Foreground="#F6F9FF">
 
     <Window.Resources>
+        <!-- Plan A skin palette: deep blue-black + violet/blue light + colored feature tiles. -->
         <LinearGradientBrush x:Key="AppBackground" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#070A0F" Offset="0"/>
-            <GradientStop Color="#030407" Offset="1"/>
+            <GradientStop Color="#08121C" Offset="0"/>
+            <GradientStop Color="#050A12" Offset="0.58"/>
+            <GradientStop Color="#03070D" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="SidebarBackground" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0B0E16" Offset="0"/>
-            <GradientStop Color="#05070B" Offset="1"/>
+            <GradientStop Color="#0B1420" Offset="0"/>
+            <GradientStop Color="#07101A" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="SurfaceBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#131620" Offset="0"/>
-            <GradientStop Color="#090B12" Offset="1"/>
+            <GradientStop Color="#15202E" Offset="0"/>
+            <GradientStop Color="#101722" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="PrimaryBrush" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#318CFF" Offset="0"/>
-            <GradientStop Color="#9E40FF" Offset="1"/>
+            <GradientStop Color="#35A7FF" Offset="0"/>
+            <GradientStop Color="#42CBFF" Offset="1"/>
         </LinearGradientBrush>
 
+        <LinearGradientBrush x:Key="PurpleGlowBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#804CFF" Offset="0"/>
+            <GradientStop Color="#3A9DFF" Offset="1"/>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="TextPrimary" Color="#F6F9FF"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#C2CBD8"/>
+        <SolidColorBrush x:Key="TextMuted" Color="#788697"/>
+        <SolidColorBrush x:Key="BorderSubtle" Color="#16FFFFFF"/>
+        <SolidColorBrush x:Key="BorderPurple" Color="#5C8A55FF"/>
+
         <Style x:Key="NavRadioStyle" TargetType="RadioButton">
-            <Setter Property="Foreground" Value="#FAFAFA"/>
-            <Setter Property="Background" Value="#090B12"/>
-            <Setter Property="BorderBrush" Value="#18FFFFFF"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Background" Value="#B20D1723"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Height" Value="62"/>
@@ -57,17 +70,18 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#12FFFFFF"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#487B5CFF"/>
+                                <Setter TargetName="Root" Property="Background" Value="#F2142233"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#526DA6FF"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#171E38"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#945AFFFF"/>
+                                <Setter TargetName="Root" Property="Background" Value="#E8171A3B"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#998A55FF"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Scale" Property="ScaleX" Value="0.985"/>
                                 <Setter TargetName="Scale" Property="ScaleY" Value="0.985"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#B36EFFFF"/>
+                                <Setter TargetName="Root" Property="Background" Value="#FF19243D"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#C58A55FF"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="Root" Property="Opacity" Value="0.48"/>
@@ -79,9 +93,9 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="#FAFAFA"/>
-            <Setter Property="Background" Value="#0E1119"/>
-            <Setter Property="BorderBrush" Value="#407B5CFF"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Background" Value="#D20E1926"/>
+            <Setter Property="BorderBrush" Value="#4F4C8DFF"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Height" Value="42"/>
             <Setter Property="Padding" Value="18,0"/>
@@ -105,17 +119,17 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#18FFFFFF"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#6B8D73FF"/>
+                                <Setter TargetName="Root" Property="Background" Value="#F2162738"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#8035A7FF"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Scale" Property="ScaleX" Value="0.97"/>
                                 <Setter TargetName="Scale" Property="ScaleY" Value="0.97"/>
-                                <Setter TargetName="Root" Property="Background" Value="#24365C"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#318CFF"/>
+                                <Setter TargetName="Root" Property="Background" Value="#FF163653"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#35A7FF"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Root" Property="Opacity" Value="0.48"/>
+                                <Setter TargetName="Root" Property="Opacity" Value="0.46"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -141,6 +155,12 @@
                                 CornerRadius="17"
                                 Background="{TemplateBinding Background}"
                                 RenderTransformOrigin="0.5,0.5">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="18"
+                                                  ShadowDepth="5"
+                                                  Opacity="0.30"
+                                                  Color="#35A7FF"/>
+                            </Border.Effect>
                             <Border.RenderTransform>
                                 <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
                             </Border.RenderTransform>
@@ -154,10 +174,10 @@
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Scale" Property="ScaleX" Value="0.975"/>
                                 <Setter TargetName="Scale" Property="ScaleY" Value="0.975"/>
-                                <Setter TargetName="Root" Property="Opacity" Value="0.84"/>
+                                <Setter TargetName="Root" Property="Opacity" Value="0.86"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Root" Property="Opacity" Value="0.52"/>
+                                <Setter TargetName="Root" Property="Opacity" Value="0.54"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -167,19 +187,27 @@
 
         <Style x:Key="MetricCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
-            <Setter Property="BorderBrush" Value="#18FFFFFF"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="15"/>
             <Setter Property="Padding" Value="14,11"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="16"
+                                      ShadowDepth="6"
+                                      Opacity="0.20"
+                                      Color="#000000"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="#080A0F"/>
-            <Setter Property="Foreground" Value="#FAFAFA"/>
-            <Setter Property="BorderBrush" Value="#18FFFFFF"/>
+            <Setter Property="Background" Value="#07111B"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="RowBackground" Value="#080A0F"/>
-            <Setter Property="AlternatingRowBackground" Value="#0C0E15"/>
+            <Setter Property="RowBackground" Value="#07111B"/>
+            <Setter Property="AlternatingRowBackground" Value="#0B1622"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
@@ -188,10 +216,23 @@
             <Setter Property="SelectionMode" Value="Single"/>
         </Style>
 
+        <Style TargetType="DataGridRow">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#16263A"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#253650"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#0C0F16"/>
-            <Setter Property="Foreground" Value="#B8B8B8"/>
-            <Setter Property="BorderBrush" Value="#18FFFFFF"/>
+            <Setter Property="Background" Value="#0E1924"/>
+            <Setter Property="Foreground" Value="#C0C8D4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtle}"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="Height" Value="34"/>
             <Setter Property="Padding" Value="8,0"/>
@@ -200,7 +241,7 @@
         <Style TargetType="DataGridCell">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="6,0"/>
-            <Setter Property="Foreground" Value="#F6F6F6"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
@@ -213,7 +254,7 @@
 
         <Border Grid.Column="0"
                 Background="{StaticResource SidebarBackground}"
-                BorderBrush="#12FFFFFF"
+                BorderBrush="#16FFFFFF"
                 BorderThickness="0,0,1,0">
             <Grid Margin="12,16,12,12">
                 <Grid.RowDefinitions>
@@ -225,28 +266,35 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal">
-                    <Border Width="44" Height="44"
+                    <Border Width="44"
+                            Height="44"
                             CornerRadius="12"
-                            Background="{StaticResource PrimaryBrush}">
-                        <TextBlock Text="✦"
-                                   FontSize="24"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                            Background="#121A28">
+                        <Image Source="AppIcon.png"
+                               Width="44"
+                               Height="44"
+                               Stretch="Uniform"/>
                     </Border>
                     <StackPanel Margin="10,3,0,0">
                         <TextBlock Text="SafeMac Cleaner"
                                    FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="Lite · 本地安全清理"
-                                   Foreground="#BABABA"
-                                   FontSize="10.5"
-                                   Margin="0,3,0,0"/>
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource TextPrimary}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                            <TextBlock Text="Lite"
+                                       Foreground="#A966FF"
+                                       FontWeight="SemiBold"
+                                       FontSize="10.5"/>
+                            <TextBlock Text=" · 本地安全清理"
+                                       Foreground="{StaticResource TextSecondary}"
+                                       FontSize="10.5"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
 
                 <TextBlock Grid.Row="1"
                            Text="核心功能"
-                           Foreground="#7A7A7A"
+                           Foreground="{StaticResource TextMuted}"
                            FontSize="10.5"
                            FontWeight="SemiBold"
                            VerticalAlignment="Bottom"/>
@@ -264,17 +312,22 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border Width="36" Height="36" CornerRadius="11"
-                                    Background="#18345C">
-                                <TextBlock Text="✦" Foreground="#318CFF"
+                                    Background="#6F4BE0">
+                                <TextBlock Text="✦"
+                                           Foreground="White"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="18"/>
                             </Border>
                             <StackPanel Grid.Column="1" Margin="10,0,0,0"
                                         VerticalAlignment="Center">
-                                <TextBlock Text="智能扫描" FontWeight="SemiBold" FontSize="13.5"/>
+                                <TextBlock Text="智能扫描"
+                                           FontWeight="SemiBold"
+                                           FontSize="13.5"/>
                                 <TextBlock Text="缓存 / 日志 / 项目垃圾"
-                                           Foreground="#BABABA" FontSize="10.5" Margin="0,3,0,0"/>
+                                           Foreground="{StaticResource TextSecondary}"
+                                           FontSize="10.5"
+                                           Margin="0,3,0,0"/>
                             </StackPanel>
                         </Grid>
                     </RadioButton>
@@ -290,17 +343,22 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border Width="36" Height="36" CornerRadius="11"
-                                    Background="#13FFFFFF">
-                                <TextBlock Text="▤" Foreground="#318CFF"
+                                    Background="#258FE8">
+                                <TextBlock Text="▰"
+                                           Foreground="White"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="17"/>
                             </Border>
                             <StackPanel Grid.Column="1" Margin="10,0,0,0"
                                         VerticalAlignment="Center">
-                                <TextBlock Text="大文件" FontWeight="SemiBold" FontSize="13.5"/>
+                                <TextBlock Text="大文件"
+                                           FontWeight="SemiBold"
+                                           FontSize="13.5"/>
                                 <TextBlock Text="Downloads / Work / Videos"
-                                           Foreground="#BABABA" FontSize="10.5" Margin="0,3,0,0"/>
+                                           Foreground="{StaticResource TextSecondary}"
+                                           FontSize="10.5"
+                                           Margin="0,3,0,0"/>
                             </StackPanel>
                         </Grid>
                     </RadioButton>
@@ -316,17 +374,23 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border Width="36" Height="36" CornerRadius="11"
-                                    Background="#13FFFFFF">
-                                <TextBlock Text="⌁" Foreground="#318CFF"
+                                    Background="#31C7C4">
+                                <TextBlock Text="⌫"
+                                           Foreground="White"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           FontSize="18"/>
+                                           FontSize="18"
+                                           FontWeight="Bold"/>
                             </Border>
                             <StackPanel Grid.Column="1" Margin="10,0,0,0"
                                         VerticalAlignment="Center">
-                                <TextBlock Text="应用卸载" FontWeight="SemiBold" FontSize="13.5"/>
+                                <TextBlock Text="应用卸载"
+                                           FontWeight="SemiBold"
+                                           FontSize="13.5"/>
                                 <TextBlock Text="本体 + 配置 + 关联文件"
-                                           Foreground="#BABABA" FontSize="10.5" Margin="0,3,0,0"/>
+                                           Foreground="{StaticResource TextSecondary}"
+                                           FontSize="10.5"
+                                           Margin="0,3,0,0"/>
                             </StackPanel>
                         </Grid>
                     </RadioButton>
@@ -342,17 +406,23 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border Width="36" Height="36" CornerRadius="11"
-                                    Background="#13FFFFFF">
-                                <TextBlock Text="◈" Foreground="#318CFF"
+                                    Background="#F47B42">
+                                <TextBlock Text="⌕"
+                                           Foreground="White"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           FontSize="18"/>
+                                           FontSize="20"
+                                           FontWeight="Bold"/>
                             </Border>
                             <StackPanel Grid.Column="1" Margin="10,0,0,0"
                                         VerticalAlignment="Center">
-                                <TextBlock Text="应用残留" FontWeight="SemiBold" FontSize="13.5"/>
+                                <TextBlock Text="应用残留"
+                                           FontWeight="SemiBold"
+                                           FontSize="13.5"/>
                                 <TextBlock Text="孤儿配置 / AppData / ProgramData"
-                                           Foreground="#BABABA" FontSize="10.5" Margin="0,3,0,0"/>
+                                           Foreground="{StaticResource TextSecondary}"
+                                           FontSize="10.5"
+                                           Margin="0,3,0,0"/>
                             </StackPanel>
                         </Grid>
                     </RadioButton>
@@ -360,19 +430,35 @@
 
                 <Border Grid.Row="4"
                         CornerRadius="15"
-                        Background="#111226"
-                        BorderBrush="#407B5CFF"
+                        Background="#D20E1C2B"
+                        BorderBrush="#524A75FF"
                         BorderThickness="1"
                         Padding="12">
                     <StackPanel>
-                        <TextBlock Text="安全清理" FontWeight="SemiBold" FontSize="12"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="24"
+                                    Height="24"
+                                    CornerRadius="8"
+                                    Background="#26345F"
+                                    Margin="0,0,8,0">
+                                <TextBlock Text="◇"
+                                           Foreground="#63A8FF"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold"/>
+                            </Border>
+                            <TextBlock Text="安全清理"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
                         <TextBlock Text="默认进入回收站，可恢复；不执行永久删除。"
                                    TextWrapping="Wrap"
-                                   Foreground="#BABABA"
+                                   Foreground="{StaticResource TextSecondary}"
                                    FontSize="10.5"
-                                   Margin="0,6,0,0"/>
+                                   Margin="0,7,0,0"/>
                         <TextBlock x:Name="DiskFreeSidebar"
-                                   Foreground="#BABABA"
+                                   Foreground="{StaticResource TextSecondary}"
                                    FontSize="10.5"
                                    Margin="0,10,0,0"/>
                     </StackPanel>
@@ -405,15 +491,16 @@
                     <TextBlock x:Name="PageTitle"
                                Text="智能扫描"
                                FontSize="27"
-                               FontWeight="Bold"/>
+                               FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimary}"/>
                     <TextBlock x:Name="PageSubtitle"
                                Text="缓存、日志、Crashpad、开发缓存和项目可重建产物。"
-                               Foreground="#BABABA"
+                               Foreground="{StaticResource TextSecondary}"
                                FontSize="12"
                                Margin="0,5,0,0"/>
                     <Border x:Name="Badge"
-                            Background="#17345C"
-                            BorderBrush="#24318CFF"
+                            Background="#2E211B58"
+                            BorderBrush="#568A55FF"
                             BorderThickness="1"
                             CornerRadius="11"
                             Padding="12,4"
@@ -421,7 +508,7 @@
                             Margin="0,10,0,0">
                         <TextBlock x:Name="BadgeText"
                                    Text="智能清理"
-                                   Foreground="#318CFF"
+                                   Foreground="#B094FF"
                                    FontWeight="SemiBold"
                                    FontSize="11"/>
                     </Border>
@@ -453,44 +540,75 @@
 
                 <Border Grid.Column="0" Style="{StaticResource MetricCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="可处理空间" Foreground="#BABABA" FontSize="11"/>
-                        <TextBlock x:Name="MetricCandidate" Text="—"
-                                   FontSize="21" FontWeight="SemiBold" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="MetricCandidateSub" Text="尚未扫描"
-                                   Foreground="#7A7A7A" FontSize="10.5" Margin="0,3,0,0"/>
+                        <TextBlock Text="可处理空间"
+                                   Foreground="{StaticResource TextSecondary}"
+                                   FontSize="11"/>
+                        <TextBlock x:Name="MetricCandidate"
+                                   Text="—"
+                                   FontSize="21"
+                                   FontWeight="SemiBold"
+                                   Margin="0,5,0,0"/>
+                        <TextBlock x:Name="MetricCandidateSub"
+                                   Text="尚未扫描"
+                                   Foreground="{StaticResource TextMuted}"
+                                   FontSize="10.5"
+                                   Margin="0,3,0,0"/>
                     </StackPanel>
                 </Border>
 
                 <Border Grid.Column="2" Style="{StaticResource MetricCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="已勾选" Foreground="#BABABA" FontSize="11"/>
-                        <TextBlock x:Name="MetricSelected" Text="—"
-                                   FontSize="21" FontWeight="SemiBold" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="MetricSelectedSub" Text="等待扫描"
-                                   Foreground="#7A7A7A" FontSize="10.5" Margin="0,3,0,0"/>
+                        <TextBlock Text="已勾选"
+                                   Foreground="{StaticResource TextSecondary}"
+                                   FontSize="11"/>
+                        <TextBlock x:Name="MetricSelected"
+                                   Text="—"
+                                   FontSize="21"
+                                   FontWeight="SemiBold"
+                                   Margin="0,5,0,0"/>
+                        <TextBlock x:Name="MetricSelectedSub"
+                                   Text="等待扫描"
+                                   Foreground="{StaticResource TextMuted}"
+                                   FontSize="10.5"
+                                   Margin="0,3,0,0"/>
                     </StackPanel>
                 </Border>
 
                 <Border Grid.Column="4" Style="{StaticResource MetricCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="发现项目" Foreground="#BABABA" FontSize="11"/>
-                        <TextBlock x:Name="MetricFound" Text="0"
-                                   FontSize="21" FontWeight="SemiBold" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="MetricFoundSub" Text="扫描结果"
-                                   Foreground="#7A7A7A" FontSize="10.5" Margin="0,3,0,0"/>
+                        <TextBlock Text="发现项目"
+                                   Foreground="{StaticResource TextSecondary}"
+                                   FontSize="11"/>
+                        <TextBlock x:Name="MetricFound"
+                                   Text="0"
+                                   FontSize="21"
+                                   FontWeight="SemiBold"
+                                   Margin="0,5,0,0"/>
+                        <TextBlock x:Name="MetricFoundSub"
+                                   Text="扫描结果"
+                                   Foreground="{StaticResource TextMuted}"
+                                   FontSize="10.5"
+                                   Margin="0,3,0,0"/>
                     </StackPanel>
                 </Border>
             </Grid>
 
             <Border Grid.Row="4"
-                    Background="#1FFFFFFF"
+                    Background="#1AFFFFFF"
                     CornerRadius="4">
                 <Grid>
                     <Border x:Name="ProgressFill"
                             Background="{StaticResource PrimaryBrush}"
                             CornerRadius="4"
                             HorizontalAlignment="Left"
-                            Width="0"/>
+                            Width="0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="8"
+                                              ShadowDepth="0"
+                                              Opacity="0.42"
+                                              Color="#35A7FF"/>
+                        </Border.Effect>
+                    </Border>
                 </Grid>
             </Border>
 
@@ -502,13 +620,13 @@
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock x:Name="ScanPathText"
                                Text="当前：—"
-                               Foreground="#BABABA"
+                               Foreground="{StaticResource TextSecondary}"
                                FontFamily="Consolas"
                                FontSize="11"
                                TextTrimming="CharacterEllipsis"/>
                     <TextBlock x:Name="ScanMetricsText"
                                Text="阶段 — · 已扫描 0 · 已发现 0 · 用时 00:00"
-                               Foreground="#7A7A7A"
+                               Foreground="{StaticResource TextMuted}"
                                FontFamily="Consolas"
                                FontSize="11"
                                Margin="0,3,0,0"/>
@@ -525,9 +643,9 @@
 
             <Border Grid.Row="7"
                     CornerRadius="14"
-                    BorderBrush="#18FFFFFF"
+                    BorderBrush="{StaticResource BorderSubtle}"
                     BorderThickness="1"
-                    Background="#080A0F"
+                    Background="#07111B"
                     ClipToBounds="True">
                 <DataGrid x:Name="ResultsGrid"
                           SelectionChanged="ResultsGrid_SelectionChanged"
@@ -537,11 +655,11 @@
             <Grid Grid.Row="8">
                 <TextBlock x:Name="StatusText"
                            Text="尚未扫描 · 点击主按钮开始智能扫描"
-                           Foreground="#BABABA"
+                           Foreground="{StaticResource TextSecondary}"
                            FontSize="11"
                            VerticalAlignment="Bottom"/>
                 <TextBlock Text="本地处理 · 可恢复"
-                           Foreground="#7A7A7A"
+                           Foreground="{StaticResource TextMuted}"
                            FontSize="11"
                            FontWeight="Medium"
                            HorizontalAlignment="Right"

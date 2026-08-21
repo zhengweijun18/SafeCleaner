@@ -1,23 +1,35 @@
 {
   "version": "4.14",
   "locked": true,
+  "skinName": "Plan A",
+  "skinBranch": "skin/plan-a-v414",
   "productName": "SafeMac Cleaner Lite",
   "visual": {
-    "backgroundTop": "#070A0F",
-    "backgroundBottom": "#030407",
-    "sidebarTop": "#0B0E16",
-    "sidebarBottom": "#05070B",
-    "surfaceTop": "#131620",
-    "surfaceBottom": "#090B12",
-    "border": "rgba(255,255,255,0.085)",
-    "borderStrong": "rgba(159,92,255,0.28)",
-    "text": "#FAFAFA",
-    "textSecondary": "#BABABA",
-    "textMuted": "#7A7A7A",
-    "accentBlue": "#318CFF",
-    "accentPurple": "#9E40FF",
-    "green": "#45D17F",
-    "orange": "#FFA833",
+    "backgroundTop": "#08121C",
+    "backgroundBottom": "#050A12",
+    "sidebarTop": "#0B1420",
+    "sidebarBottom": "#07101A",
+    "surfaceTop": "#15202E",
+    "surfaceBottom": "#101722",
+    "table": "#07111B",
+    "border": "rgba(255,255,255,0.075)",
+    "borderStrong": "rgba(138,85,255,0.34)",
+    "text": "#F6F9FF",
+    "textSecondary": "#C2CBD8",
+    "textMuted": "#788697",
+    "accentBlue": "#35A7FF",
+    "accentBlue2": "#42CBFF",
+    "accentPurple": "#8A55FF",
+    "accentTeal": "#31C7C4",
+    "accentCoral": "#F47B42",
+    "green": "#45DB80",
+    "orange": "#FA9C40",
+    "featureIcons": {
+      "smart": "#6F4BE0",
+      "large": "#258FE8",
+      "apps": "#31C7C4",
+      "leftovers": "#F47B42"
+    },
     "cornerRadius": {
       "sidebarCard": 14,
       "metricCard": 15,
@@ -26,12 +38,24 @@
       "badge": 11
     },
     "sidebarWidth": 236,
-    "minWindow": [
+    "minWindowMac": [
       880,
       600
     ],
+    "minWindowWindows": [
+      980,
+      640
+    ],
     "primaryButtonHeight": 54,
-    "progressHeight": 8
+    "progressHeight": 8,
+    "appIcon": {
+      "sourceStyle": "purple-blue rounded square, white broom, white sparkle",
+      "masterSize": [
+        1024,
+        1024
+      ],
+      "transparentOutsideRoundedSquare": true
+    }
   },
   "interaction": {
     "navigationStartsScan": false,
@@ -47,6 +71,8 @@
     "destructiveDefault": "recycle_bin_or_trash",
     "permanentDelete": false
   },
+  "skinOnlyChange": true,
+  "featureLogicLocked": true,
   "features": [
     "智能扫描",
     "大文件",

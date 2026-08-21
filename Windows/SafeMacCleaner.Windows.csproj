@@ -9,8 +9,14 @@
     <RootNamespace>SafeMacCleaner.Windows</RootNamespace>
     <Version>4.14.0</Version>
     <Platforms>AnyCPU;x64;ARM64</Platforms>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
+
   <ItemGroup>
     <Resource Include="AppIcon.png" />
   </ItemGroup>
+
+  <Target Name="PreparePlanAApplicationIcon" BeforeTargets="CoreCompile" Condition="'$(OS)' == 'Windows_NT'">
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\prepare_app_icon.ps1&quot;" />
+  </Target>
 </Project>
