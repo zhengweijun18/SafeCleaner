@@ -1,0 +1,1 @@
+preparing binary hero asset
