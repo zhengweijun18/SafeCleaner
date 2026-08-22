@@ -1,1 +1,0 @@
-Using Git data API for final asset commit.
