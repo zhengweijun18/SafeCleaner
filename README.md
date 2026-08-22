@@ -1,5 +1,11 @@
 # SafeMac Cleaner Lite
 
+<p align="center">
+  <img src="docs/software-intro.svg" alt="SafeMac Cleaner Lite 软件介绍" width="100%">
+</p>
+
+## 软件介绍
+
 本仓库仅维护当前最新的 **v4.14 跨平台同步基线版**。
 
 SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的磁盘清理与应用卸载工具。macOS Intel、macOS Apple Silicon / Universal2 与 Windows 共享同一套功能、交互和视觉基线；平台差异仅存在于系统路径、权限模型与底层 API。
