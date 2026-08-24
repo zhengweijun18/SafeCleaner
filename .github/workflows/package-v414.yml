@@ -1,6 +1,7 @@
 name: Build v4.14 download packages
 
 # Windows packages are built as verified self-contained executables before publishing.
+# Windows source and UI changes automatically rebuild both architecture packages.
 on:
   push:
     branches: [main]
