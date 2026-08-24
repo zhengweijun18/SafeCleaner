@@ -14,9 +14,10 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 | 使用场景 | 下载入口 | 使用方式 |
 | --- | --- | --- |
-| v4.14 跨平台完整源码 | [下载跨平台 ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_CrossPlatform.zip) | 推荐。一个包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
+| v4.14 跨平台完整源码 | [下载跨平台 ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_CrossPlatform.zip) | 一个包同时包含 macOS、Windows 与 Shared 跨平台源码和规则。 |
 | macOS Intel / M 芯片 | [下载 macOS ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_macOS.zip) | 解压后双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
-| Windows x64 / ARM64 | [下载 Windows ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_Windows.zip) | 解压后双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
+| Windows x64 | [下载 Windows x64 ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_Windows_x64.zip) | **预编译 self-contained 版本**。完整解压后双击 `双击安装-Windows.cmd`，无需安装 .NET SDK。 |
+| Windows ARM64 | [下载 Windows ARM64 ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_Windows_ARM64.zip) | **预编译 self-contained 版本**。完整解压后双击 `双击安装-Windows.cmd`，无需安装 .NET SDK。 |
 
 > 仓库只保留 v4.14 当前版本，不再保存 v4.13.1 及更早历史安装包。
 
@@ -39,8 +40,8 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 | macOS | Intel x86_64 | macOS 10.15 | AppKit / Swift |
 | macOS | Apple Silicon arm64 | macOS 11 | AppKit / Swift |
 | macOS | Universal2 | x86_64 + arm64 | 同一套 AppKit 源码 |
-| Windows | x64 | Windows 10 1809+ | WPF / .NET 8 |
-| Windows | ARM64 | Windows 10/11 ARM64 | WPF / .NET 8 |
+| Windows | x64 | Windows 10 1809+ | WPF / .NET 8，预编译 self-contained |
+| Windows | ARM64 | Windows 10/11 ARM64 | WPF / .NET 8，预编译 self-contained |
 
 ## 文件说明
 
@@ -49,7 +50,7 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 - `Shared/FEATURE_LOCK.md`：跨平台功能与交互锁。
 - `Shared/design-lock.json`：视觉设计 Token 与行为基线。
 - `Shared/PLATFORM_MATRIX.md`：平台、架构和最低系统版本矩阵。
-- `downloads/`：当前 v4.14 跨平台、macOS、Windows 三个 ZIP 下载包及 SHA-256 校验值。
+- `downloads/`：当前 v4.14 跨平台源码包、macOS 包、Windows x64 / ARM64 预编译包及 SHA-256 校验值。
 
 ## macOS 使用方式
 
@@ -69,19 +70,19 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 ## Windows 使用方式
 
-下载 Windows ZIP 并解压，双击：
+根据系统架构下载 **Windows x64 ZIP** 或 **Windows ARM64 ZIP**，完整解压后双击：
 
 ```text
 双击安装-Windows.cmd
 ```
 
-脚本自动识别 x64 / ARM64，并发布 self-contained 程序，默认安装到：
+正式 Windows ZIP 已经包含预编译 `SafeMacCleanerLite.exe`，用户电脑无需 .NET 8 SDK。安装脚本默认安装到：
 
 ```text
 %LOCALAPPDATA%\Programs\SafeMac Cleaner Lite
 ```
 
-同时创建开始菜单快捷方式。
+同时创建开始菜单快捷方式。安装窗口会保持打开，若发生错误可直接看到具体原因，不再一闪而过。
 
 ## 设计与功能锁
 

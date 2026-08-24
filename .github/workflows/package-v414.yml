@@ -15,8 +15,84 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: package-v414-main
+  cancel-in-progress: true
+
 jobs:
-  package:
+  build-windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            artifact: windows-x64
+            package: SafeCleaner_v414_Windows_x64.zip
+          - rid: win-arm64
+            artifact: windows-arm64
+            package: SafeCleaner_v414_Windows_ARM64.zip
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Compile and package Windows
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:RUNNER_TEMP '${{ matrix.rid }}'
+          $pkg = Join-Path $env:RUNNER_TEMP 'package-${{ matrix.rid }}'
+          $zip = Join-Path $env:RUNNER_TEMP '${{ matrix.package }}'
+
+          dotnet publish 'Windows/SafeMacCleaner.Windows.csproj' `
+            -c Release `
+            -r '${{ matrix.rid }}' `
+            --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -o $out
+
+          if ($LASTEXITCODE -ne 0) {
+            throw 'dotnet publish failed with exit code ' + $LASTEXITCODE
+          }
+
+          $exe = Join-Path $out 'SafeMacCleanerLite.exe'
+          if (-not (Test-Path $exe)) {
+            throw 'Expected executable was not generated: ' + $exe
+          }
+
+          New-Item -ItemType Directory -Force -Path $pkg | Out-Null
+          Copy-Item $exe (Join-Path $pkg 'SafeMacCleanerLite.exe') -Force
+          Copy-Item 'Windows/双击安装-Windows.cmd' (Join-Path $pkg '双击安装-Windows.cmd') -Force
+
+          @"
+          SafeMac Cleaner Lite v4.14
+          Architecture: ${{ matrix.rid }}
+
+          1. 完整解压本 ZIP。
+          2. 双击 双击安装-Windows.cmd。
+          3. 本包已经包含预编译 self-contained EXE，无需安装 .NET SDK。
+          "@ | Set-Content -Encoding UTF8 (Join-Path $pkg 'README.txt')
+
+          if (Test-Path $zip) { Remove-Item $zip -Force }
+          Compress-Archive -Path (Join-Path $pkg '*') -DestinationPath $zip -CompressionLevel Optimal
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ runner.temp }}/${{ matrix.package }}
+          if-no-files-found: error
+          retention-days: 7
+
+  publish-packages:
+    needs: build-windows
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,19 +100,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build download ZIPs
+      - name: Download Windows x64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-x64
+          path: /tmp/windows-x64
+
+      - name: Download Windows ARM64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-arm64
+          path: /tmp/windows-arm64
+
+      - name: Build source and platform ZIPs
         shell: bash
         run: |
           set -euo pipefail
           rm -rf downloads \
             /tmp/SafeCleaner_v414_CrossPlatform \
-            /tmp/SafeCleaner_v414_macOS \
-            /tmp/SafeCleaner_v414_Windows
+            /tmp/SafeCleaner_v414_macOS
 
           mkdir -p downloads \
             /tmp/SafeCleaner_v414_CrossPlatform \
-            /tmp/SafeCleaner_v414_macOS \
-            /tmp/SafeCleaner_v414_Windows
+            /tmp/SafeCleaner_v414_macOS
 
           cp -R macOS Windows Shared /tmp/SafeCleaner_v414_CrossPlatform/
           cp README.md CHANGELOG.md /tmp/SafeCleaner_v414_CrossPlatform/
@@ -45,18 +131,20 @@ jobs:
           fi
 
           cp -R macOS/. /tmp/SafeCleaner_v414_macOS/
-          cp -R Windows/. /tmp/SafeCleaner_v414_Windows/
 
           cd /tmp
           zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_CrossPlatform.zip" SafeCleaner_v414_CrossPlatform
           zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_macOS.zip" SafeCleaner_v414_macOS
-          zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_Windows.zip" SafeCleaner_v414_Windows
 
           cd "$GITHUB_WORKSPACE"
+          cp /tmp/windows-x64/SafeCleaner_v414_Windows_x64.zip downloads/
+          cp /tmp/windows-arm64/SafeCleaner_v414_Windows_ARM64.zip downloads/
+
           sha256sum \
             downloads/SafeCleaner_v414_CrossPlatform.zip \
             downloads/SafeCleaner_v414_macOS.zip \
-            downloads/SafeCleaner_v414_Windows.zip \
+            downloads/SafeCleaner_v414_Windows_x64.zip \
+            downloads/SafeCleaner_v414_Windows_ARM64.zip \
             > downloads/SHA256SUMS.txt
 
       - name: Commit download packages
@@ -65,13 +153,10 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add downloads/SafeCleaner_v414_CrossPlatform.zip \
-                  downloads/SafeCleaner_v414_macOS.zip \
-                  downloads/SafeCleaner_v414_Windows.zip \
-                  downloads/SHA256SUMS.txt
+          git add -A downloads
           if git diff --cached --quiet; then
             echo 'Packages are already up to date.'
             exit 0
           fi
-          git commit -m 'release: publish v4.14 platform download packages'
+          git commit -m 'release: publish v4.14 prebuilt Windows packages'
           git push
