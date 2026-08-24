@@ -55,6 +55,20 @@ jobs:
           $pkg = Join-Path $env:RUNNER_TEMP 'package-${{ matrix.rid }}'
           $zip = Join-Path $env:RUNNER_TEMP '${{ matrix.package }}'
 
+          $xamlPath = 'Windows/MainWindow.xaml'
+          $xaml = Get-Content -Raw -Path $xamlPath
+          $xaml = [regex]::Replace(
+            $xaml,
+            '(?s)\r?\n\s*<Border\.RenderTransform>\s*<ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>\s*</Border\.RenderTransform>',
+            ''
+          )
+          $xaml = [regex]::Replace(
+            $xaml,
+            '(?m)^\s*<Setter TargetName="Scale" Property="ScaleX" Value="[^"]+"/>\r?\n\s*<Setter TargetName="Scale" Property="ScaleY" Value="[^"]+"/>\r?\n',
+            ''
+          )
+          Set-Content -Path $xamlPath -Value $xaml -Encoding UTF8 -NoNewline
+
           dotnet publish 'Windows/SafeMacCleaner.Windows.csproj' `
             -c Release `
             -r '${{ matrix.rid }}' `
