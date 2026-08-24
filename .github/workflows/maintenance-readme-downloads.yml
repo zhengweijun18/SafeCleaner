@@ -1,0 +1,48 @@
+name: One-off README hero maintenance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README-HERO.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore full-resolution README hero
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs
+          cat .readme-hero/part-* | base64 -d > docs/software-intro.webp
+          rm -f docs/software-intro.svg
+          rm -rf .readme-hero README-HERO.ready
+
+      - name: Delete obsolete Plan A branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin --delete skin/plan-a-v414 || true
+
+      - name: Commit README hero
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A docs .readme-hero README-HERO.ready 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'docs: restore full-resolution software introduction image'
+          git push
