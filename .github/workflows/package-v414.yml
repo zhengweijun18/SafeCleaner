@@ -1,4 +1,4 @@
-name: Build v4.14 download package
+name: Build v4.14 download packages
 
 on:
   push:
@@ -24,12 +24,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build cross-platform ZIP
+      - name: Build download ZIPs
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf downloads /tmp/SafeCleaner_v414_CrossPlatform
-          mkdir -p downloads /tmp/SafeCleaner_v414_CrossPlatform
+          rm -rf downloads \
+            /tmp/SafeCleaner_v414_CrossPlatform \
+            /tmp/SafeCleaner_v414_macOS \
+            /tmp/SafeCleaner_v414_Windows
+
+          mkdir -p downloads \
+            /tmp/SafeCleaner_v414_CrossPlatform \
+            /tmp/SafeCleaner_v414_macOS \
+            /tmp/SafeCleaner_v414_Windows
 
           cp -R macOS Windows Shared /tmp/SafeCleaner_v414_CrossPlatform/
           cp README.md CHANGELOG.md /tmp/SafeCleaner_v414_CrossPlatform/
@@ -37,21 +44,34 @@ jobs:
             cp .gitignore /tmp/SafeCleaner_v414_CrossPlatform/
           fi
 
+          cp -R macOS/. /tmp/SafeCleaner_v414_macOS/
+          cp -R Windows/. /tmp/SafeCleaner_v414_Windows/
+
           cd /tmp
           zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_CrossPlatform.zip" SafeCleaner_v414_CrossPlatform
-          cd "$GITHUB_WORKSPACE"
-          sha256sum downloads/SafeCleaner_v414_CrossPlatform.zip > downloads/SHA256SUMS.txt
+          zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_macOS.zip" SafeCleaner_v414_macOS
+          zip -qry "$GITHUB_WORKSPACE/downloads/SafeCleaner_v414_Windows.zip" SafeCleaner_v414_Windows
 
-      - name: Commit download package
+          cd "$GITHUB_WORKSPACE"
+          sha256sum \
+            downloads/SafeCleaner_v414_CrossPlatform.zip \
+            downloads/SafeCleaner_v414_macOS.zip \
+            downloads/SafeCleaner_v414_Windows.zip \
+            > downloads/SHA256SUMS.txt
+
+      - name: Commit download packages
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add downloads/SafeCleaner_v414_CrossPlatform.zip downloads/SHA256SUMS.txt
+          git add downloads/SafeCleaner_v414_CrossPlatform.zip \
+                  downloads/SafeCleaner_v414_macOS.zip \
+                  downloads/SafeCleaner_v414_Windows.zip \
+                  downloads/SHA256SUMS.txt
           if git diff --cached --quiet; then
-            echo 'Package is already up to date.'
+            echo 'Packages are already up to date.'
             exit 0
           fi
-          git commit -m 'release: publish v4.14 cross-platform download package'
+          git commit -m 'release: publish v4.14 platform download packages'
           git push
