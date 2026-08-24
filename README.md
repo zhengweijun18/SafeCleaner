@@ -1,10 +1,8 @@
 # SafeMac Cleaner Lite
 
 <p align="center">
-  <img src="docs/software-intro.svg" alt="SafeMac Cleaner Lite 软件介绍" width="100%">
+  <img src="docs/software-intro.webp" alt="SafeMac Cleaner Lite 软件介绍" width="100%" />
 </p>
-
-## 软件介绍
 
 本仓库仅维护当前最新的 **v4.14 跨平台同步基线版**。
 
@@ -14,9 +12,9 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 | 使用场景 | 下载入口 | 使用方式 |
 | --- | --- | --- |
-| v4.14 跨平台完整源码 | [下载仓库 ZIP](https://github.com/zhengweijun18/SafeCleaner/archive/refs/heads/main.zip) | 推荐。一个包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
-| macOS Intel / M 芯片 | [进入 macOS 目录](https://github.com/zhengweijun18/SafeCleaner/tree/main/macOS) | 下载仓库后进入 `macOS`，双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
-| Windows x64 / ARM64 | [进入 Windows 目录](https://github.com/zhengweijun18/SafeCleaner/tree/main/Windows) | 下载仓库后进入 `Windows`，双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
+| v4.14 跨平台完整源码 | [下载跨平台 ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_CrossPlatform.zip) | 推荐。一个包同时包含 macOS、Windows 与 Shared 跨平台规则。 |
+| macOS Intel / M 芯片 | [下载 macOS ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_macOS.zip) | 解压后双击 `双击安装-macOS.command`。老 Intel Mac 构建 x86_64；新版 Xcode / SDK 自动构建 Universal2。 |
+| Windows x64 / ARM64 | [下载 Windows ZIP](https://github.com/zhengweijun18/SafeCleaner/raw/refs/heads/main/downloads/SafeCleaner_v414_Windows.zip) | 解压后双击 `双击安装-Windows.cmd`。脚本自动识别 x64 / ARM64；首次本地构建需要 .NET 8 SDK。 |
 
 > 仓库只保留 v4.14 当前版本，不再保存 v4.13.1 及更早历史安装包。
 
@@ -49,10 +47,11 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 - `Shared/FEATURE_LOCK.md`：跨平台功能与交互锁。
 - `Shared/design-lock.json`：视觉设计 Token 与行为基线。
 - `Shared/PLATFORM_MATRIX.md`：平台、架构和最低系统版本矩阵。
+- `downloads/`：当前 v4.14 跨平台、macOS、Windows 三个 ZIP 下载包及 SHA-256 校验值。
 
 ## macOS 使用方式
 
-下载仓库 ZIP 并解压，进入 `macOS/`，双击：
+下载 macOS ZIP 并解压，双击：
 
 ```text
 双击安装-macOS.command
@@ -68,7 +67,7 @@ SafeMac Cleaner Lite 是一款本地运行、以安全和可恢复为前提的�
 
 ## Windows 使用方式
 
-下载仓库 ZIP 并解压，进入 `Windows/`，双击：
+下载 Windows ZIP 并解压，双击：
 
 ```text
 双击安装-Windows.cmd
