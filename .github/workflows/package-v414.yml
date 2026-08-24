@@ -1,3 +1,4 @@
+# diagnostic-run: 4
 name: Build v4.14 download packages
 
 on:
