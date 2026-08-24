@@ -9,6 +9,8 @@ on:
       - 'Shared/**'
       - 'README.md'
       - 'CHANGELOG.md'
+      - '.readme-hero/**'
+      - 'README-HERO.ready'
       - '.github/workflows/package-v414.yml'
   workflow_dispatch:
 
@@ -23,6 +25,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: One-off repository maintenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          if compgen -G '.readme-hero/part-*' > /dev/null; then
+            mkdir -p docs
+            cat .readme-hero/part-* | base64 -d > docs/software-intro.webp
+            rm -f docs/software-intro.svg
+            rm -rf .readme-hero README-HERO.ready
+          fi
+          git push origin --delete skin/plan-a-v414 || true
 
       - name: Build download ZIPs
         shell: bash
@@ -59,19 +73,16 @@ jobs:
             downloads/SafeCleaner_v414_Windows.zip \
             > downloads/SHA256SUMS.txt
 
-      - name: Commit download packages
+      - name: Commit generated assets and packages
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add downloads/SafeCleaner_v414_CrossPlatform.zip \
-                  downloads/SafeCleaner_v414_macOS.zip \
-                  downloads/SafeCleaner_v414_Windows.zip \
-                  downloads/SHA256SUMS.txt
+          git add -A docs .readme-hero README-HERO.ready downloads 2>/dev/null || true
           if git diff --cached --quiet; then
-            echo 'Packages are already up to date.'
+            echo 'Generated files are already up to date.'
             exit 0
           fi
-          git commit -m 'release: publish v4.14 platform download packages'
+          git commit -m 'release: refresh v4.14 downloads and README hero'
           git push
