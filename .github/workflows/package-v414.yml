@@ -10,13 +10,18 @@ on:
       - 'README.md'
       - 'CHANGELOG.md'
       - '.github/workflows/package-v414.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Windows/**'
+      - '.github/workflows/package-v414.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: package-v414-main
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -92,6 +97,7 @@ jobs:
           retention-days: 7
 
   publish-packages:
+    if: github.event_name != 'pull_request'
     needs: build-windows
     runs-on: ubuntu-latest
     steps:
