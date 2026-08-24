@@ -55,6 +55,7 @@ jobs:
           $pkg = Join-Path $env:RUNNER_TEMP 'package-${{ matrix.rid }}'
           $zip = Join-Path $env:RUNNER_TEMP '${{ matrix.package }}'
 
+          # Temporary source patches used only by this diagnostic PR.
           $xamlPath = 'Windows/MainWindow.xaml'
           $xaml = Get-Content -Raw -Path $xamlPath
           $xaml = [regex]::Replace(
@@ -68,6 +69,43 @@ jobs:
             ''
           )
           Set-Content -Path $xamlPath -Value $xaml -Encoding UTF8 -NoNewline
+
+          $enginePath = 'Windows/ScanEngine.cs'
+          $engine = Get-Content -Raw -Path $enginePath
+          if ($engine -notmatch 'using System\.IO;') {
+            $engine = $engine.Replace("using System.Security;`r`n", "using System.Security;`r`nusing System.IO;`r`n")
+            if ($engine -notmatch 'using System\.IO;') {
+              $engine = $engine.Replace("using System.Security;`n", "using System.Security;`nusing System.IO;`n")
+            }
+          }
+          Set-Content -Path $enginePath -Value $engine -Encoding UTF8 -NoNewline
+
+          $mainPath = 'Windows/MainWindow.xaml.cs'
+          $main = Get-Content -Raw -Path $mainPath
+          $main = $main.Replace(
+            'var progress = new Progress<ScanProgressInfo>(p =>',
+            'IProgress<ScanProgressInfo> progress = new Progress<ScanProgressInfo>(p =>'
+          )
+          $oldMetrics = @"
+                var checkedItems = data.Where(x => x.Checked && x.CanDelete).ToList();
+                long selected = checkedItems.Sum(x => x.Size);
+
+                MetricCandidate.Text = Format.Bytes(candidate);
+                MetricCandidateSub.Text = "当前页面候选";
+                MetricSelected.Text = Format.Bytes(selected);
+                MetricSelectedSub.Text = $"{checkedItems.Count} 项将处理";
+"@
+          $newMetrics = @"
+                var selectedItems = data.Where(x => x.Checked && x.CanDelete).ToList();
+                long selected = selectedItems.Sum(x => x.Size);
+
+                MetricCandidate.Text = Format.Bytes(candidate);
+                MetricCandidateSub.Text = "当前页面候选";
+                MetricSelected.Text = Format.Bytes(selected);
+                MetricSelectedSub.Text = $"{selectedItems.Count} 项将处理";
+"@
+          $main = $main.Replace($oldMetrics, $newMetrics)
+          Set-Content -Path $mainPath -Value $main -Encoding UTF8 -NoNewline
 
           dotnet publish 'Windows/SafeMacCleaner.Windows.csproj' `
             -c Release `
