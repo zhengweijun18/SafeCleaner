@@ -1,5 +1,6 @@
 name: Build v4.14 download packages
 
+# Windows packages are built as verified self-contained executables before publishing.
 on:
   push:
     branches: [main]
