@@ -84,6 +84,39 @@ jobs:
           if (Test-Path $zip) { Remove-Item $zip -Force }
           Compress-Archive -Path (Join-Path $pkg '*') -DestinationPath $zip -CompressionLevel Optimal
 
+      - name: Install and launch smoke test (x64)
+        if: matrix.rid == 'win-x64'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $pkg = Join-Path $env:RUNNER_TEMP 'package-win-x64'
+          $installer = Join-Path $pkg '双击安装-Windows.cmd'
+          $installedExe = Join-Path $env:LOCALAPPDATA 'Programs\SafeMac Cleaner Lite\SafeMacCleanerLite.exe'
+
+          Push-Location $pkg
+          try {
+            & cmd.exe /d /c "`"$installer`" --inner"
+            if ($LASTEXITCODE -ne 0) {
+              throw "Installer smoke test failed with exit code $LASTEXITCODE"
+            }
+          }
+          finally {
+            Pop-Location
+          }
+
+          if (-not (Test-Path $installedExe)) {
+            throw 'Installer did not create the expected executable: ' + $installedExe
+          }
+
+          Start-Sleep -Seconds 5
+          $running = Get-Process -Name 'SafeMacCleanerLite' -ErrorAction SilentlyContinue
+          if ($null -eq $running) {
+            throw 'Application exited during startup smoke test.'
+          }
+
+          $running | Stop-Process -Force
+          Write-Host 'PASS: installer completed and application remained running through startup smoke test.'
+
       - name: Upload Windows package
         uses: actions/upload-artifact@v4
         with:
