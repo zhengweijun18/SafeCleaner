@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.Security;
+using System.IO;
 
 namespace SafeMacCleaner.Windows;
 

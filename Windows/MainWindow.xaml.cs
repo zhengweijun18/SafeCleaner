@@ -157,7 +157,7 @@ public partial class MainWindow : Window
 
         try
         {
-            var progress = new Progress<ScanProgressInfo>(p =>
+            IProgress<ScanProgressInfo> progress = new Progress<ScanProgressInfo>(p =>
             {
                 _latestProgress = p;
                 RenderProgress(p);
@@ -433,13 +433,13 @@ public partial class MainWindow : Window
             else
             {
                 long candidate = data.Where(x => x.CanDelete).Sum(x => x.Size);
-                var checkedItems = data.Where(x => x.Checked && x.CanDelete).ToList();
-                long selected = checkedItems.Sum(x => x.Size);
+                var selectedItems = data.Where(x => x.Checked && x.CanDelete).ToList();
+                long selected = selectedItems.Sum(x => x.Size);
 
                 MetricCandidate.Text = Format.Bytes(candidate);
                 MetricCandidateSub.Text = "当前页面候选";
                 MetricSelected.Text = Format.Bytes(selected);
-                MetricSelectedSub.Text = $"{checkedItems.Count} 项将处理";
+                MetricSelectedSub.Text = $"{selectedItems.Count} 项将处理";
                 MetricFound.Text = data.Count.ToString();
                 MetricFoundSub.Text = "发现项目";
             }

@@ -49,9 +49,6 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
                             <ContentPresenter Margin="12,0"
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -65,8 +62,6 @@
                                 <Setter TargetName="Root" Property="BorderBrush" Value="#945AFFFF"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Scale" Property="ScaleX" Value="0.985"/>
-                                <Setter TargetName="Scale" Property="ScaleY" Value="0.985"/>
                                 <Setter TargetName="Root" Property="BorderBrush" Value="#B36EFFFF"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
@@ -97,9 +92,6 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -109,8 +101,6 @@
                                 <Setter TargetName="Root" Property="BorderBrush" Value="#6B8D73FF"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Scale" Property="ScaleX" Value="0.97"/>
-                                <Setter TargetName="Scale" Property="ScaleY" Value="0.97"/>
                                 <Setter TargetName="Root" Property="Background" Value="#24365C"/>
                                 <Setter TargetName="Root" Property="BorderBrush" Value="#318CFF"/>
                             </Trigger>
@@ -141,9 +131,6 @@
                                 CornerRadius="17"
                                 Background="{TemplateBinding Background}"
                                 RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -152,8 +139,6 @@
                                 <Setter TargetName="Root" Property="Opacity" Value="1"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Scale" Property="ScaleX" Value="0.975"/>
-                                <Setter TargetName="Scale" Property="ScaleY" Value="0.975"/>
                                 <Setter TargetName="Root" Property="Opacity" Value="0.84"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
